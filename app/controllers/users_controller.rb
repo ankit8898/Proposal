@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-
+    @filtered_users = User.search(params[:search])  if params[:search]
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }
@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    
+    @proposal = Proposal.new
     @proposals = @user.proposals
         respond_to do |format|
       format.html # show.html.erb

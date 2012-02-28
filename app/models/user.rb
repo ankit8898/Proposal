@@ -5,4 +5,10 @@ has_many :proposals
 belongs_to :country
 
 belongs_to :company
+
+def self.search(val)
+where("name like ?", "%#{val}%")
+end
+
+
 end

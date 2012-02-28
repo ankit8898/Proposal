@@ -24,10 +24,23 @@
   </tbody>
 </table>
 
+<%= simple_form_for @proposal, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>New Proposal</legend>
+    <%= f.error_notification %>
+<%= f.input :proposal_name %>
+<%= f.input :description ,:hint => "What Kind of Proposal is it?" %>
+
+<%= hidden_field_tag 'user_id', @user.id%>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', proposals_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>
 
 
-
-<%= link_to 'New Proposal', new_proposal_path(:user_id => @user.id), :class => 'btn btn-primary' %>
+<%#= link_to 'New Proposal', new_proposal_path(:user_id => @user.id), :class => 'btn btn-primary' %>
 
 
   <%= link_to 'Back', users_path, :class => 'btn'  %>
