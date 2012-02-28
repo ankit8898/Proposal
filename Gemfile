@@ -21,6 +21,9 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+group :production do
+ gem 'pg'
+end
 gem 'country_select'
 gem 'jquery-rails'
 gem 'simple_form'
