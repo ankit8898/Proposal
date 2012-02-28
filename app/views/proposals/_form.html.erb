@@ -1,6 +1,7 @@
 <%= simple_form_for @proposal, :html => { :class => 'form-horizontal' } do |f| %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Proposal</legend>
+    <%= f.error_notification %>
 <%= f.input :proposal_name %>
 <%= f.input :description %>
 
