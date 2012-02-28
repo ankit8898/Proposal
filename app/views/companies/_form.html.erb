@@ -1,0 +1,11 @@
+<%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Company</legend>
+<%= f.input :name%>
+<%= f.input :country ,:priority => [ "India" ]%>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', companies_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

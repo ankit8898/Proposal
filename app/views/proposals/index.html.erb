@@ -1,0 +1,26 @@
+<h1>Proposals</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Proposal name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.id %></td>
+        <td><%= link_to proposal.proposal_name, proposal_path(proposal) %></td>
+        <td><%= proposal.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_proposal_path(proposal), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', proposal_path(proposal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_proposal_path, :class => 'btn btn-primary' %>

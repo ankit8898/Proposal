@@ -1,0 +1,33 @@
+<div class="form-actions">
+<h1>Welcome: <%=@user.name%></h1> 
+<p>
+  <b>Company</b>
+  <%= @user.company.name %>
+</p>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Proposal Name</th>
+      <th>Description</th>
+    </tr>
+    <% @proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.proposal_name%></td>
+        <td><%= proposal.description %></td>
+      </tr>
+    <% end %>
+  </thead>
+  <tbody>
+    
+  </tbody>
+</table>
+
+
+
+
+<%= link_to 'New Proposal', new_proposal_path(:user_id => @user.id), :class => 'btn btn-primary' %>
+
+
+  <%= link_to 'Back', users_path, :class => 'btn'  %>
