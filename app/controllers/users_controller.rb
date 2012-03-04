@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     
     @proposal = Proposal.new
     @proposals = @user.proposals
+    if session[:proposal_errors]
+    session[:proposal_errors].each {|error, error_message| @proposal.errors.add error, error_message}
+    session.delete :proposal_errors
+  end
         respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

@@ -3,7 +3,7 @@ class ProposalsController < ApplicationController
   # GET /proposals.json
   def index
     @proposals = Proposal.all
-
+    @proposal = Proposal.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @proposals }
@@ -40,18 +40,22 @@ class ProposalsController < ApplicationController
   # POST /proposals
   # POST /proposals.json
   def create
-   p "$$$$$$naju$$$$$$$$$$$$$$$$$#{params[:user_id].inspect}"
     @proposal = Proposal.new(params[:proposal].merge(:user_id => params[:user_id]))
     
     respond_to do |format|
       if @proposal.save
         format.html { redirect_to user_path(:id => params[:user_id]), :notice => 'Proposal was successfully created.' }
-        format.json { render :json => @proposal, :status => :created, :location => @proposal }
+        format.json { render :json => @proposal, :status => :created }
+        format.js
       else
-        format.html { render :action => "new" }
+      if @proposal.errors.any?
+        session[:proposal_errors] = @proposal.errors
+      end
+        format.html { redirect_to user_path(:id => params[:user_id]) }
         format.json { render :json => @proposal.errors, :status => :unprocessable_entity }
       end
     end
+    
   end
 
   # PUT /proposals/1
