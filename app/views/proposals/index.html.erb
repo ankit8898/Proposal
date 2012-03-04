@@ -1,26 +1,19 @@
-<h1>Proposals</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Proposal name</th>
-      <th>Created at</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @proposals.each do |proposal| %>
-      <tr>
-        <td><%= proposal.id %></td>
-        <td><%= link_to proposal.proposal_name, proposal_path(proposal) %></td>
-        <td><%= proposal.created_at %></td>
-        <td>
-          <%= link_to 'Edit', edit_proposal_path(proposal), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', proposal_path(proposal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to 'New', new_proposal_path, :class => 'btn btn-primary' %>
+
+<div id="proposals">
+  <%= render @proposals %>
+</div>
+
+<%= simple_form_for @proposal, :remote => true,:html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Proposal</legend>
+    <%= f.error_notification %>
+<%= f.input :proposal_name %>
+<%= f.input :description %>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', proposals_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

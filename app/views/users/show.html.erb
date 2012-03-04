@@ -5,26 +5,55 @@
   <%= @user.company.name %>
 </p>
 </div>
-
 <table class="table table-striped">
   <thead>
+   <tr>
+      <td><h1>Completed Proposals</h1></td>
+      <td></td>
+    </tr>
     <tr>
       <th>Proposal Name</th>
+      
       <th>Description</th>
     </tr>
-    <% @proposals.each do |proposal| %>
+    <%if @completed_proposals %>
+    <% @completed_proposals.each do |proposal| %>
       <tr>
         <td><%= proposal.proposal_name%></td>
         <td><%= proposal.description %></td>
       </tr>
+    <% end %>
     <% end %>
   </thead>
   <tbody>
     
   </tbody>
 </table>
-
-<%= simple_form_for @proposal, :html => { :class => 'form-horizontal' } do |f| %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+      <td><h1>Draft Proposals</h1></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Proposal Name</th>
+      
+      <th>Description</th>
+    </tr>
+    <%if @draft_proposals %>
+    <% @draft_proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.proposal_name%></td>
+        <td><%= proposal.description %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </thead>
+  <tbody>
+    
+  </tbody>
+</table>
+<%= simple_form_for @proposal,:html => { :class => 'form-horizontal' }  do |f| %>
   <fieldset>
     <legend>New Proposal</legend>
     <%= f.error_notification %>
@@ -34,6 +63,8 @@
 <%= hidden_field_tag 'user_id', @user.id%>
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
+      
+      <%= f.submit "Save as Draft", :class => 'btn btn-warning' %>
       <%= link_to 'Cancel', proposals_path, :class => 'btn' %>
     </div>
   </fieldset>

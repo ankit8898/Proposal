@@ -17,6 +17,8 @@ class UsersController < ApplicationController
     
     @proposal = Proposal.new
     @proposals = @user.proposals
+    @completed_proposals = Proposal.without_draft.all 
+    @draft_proposals =  Proposal.with_draft.all
     if session[:proposal_errors]
     session[:proposal_errors].each {|error, error_message| @proposal.errors.add error, error_message}
     session.delete :proposal_errors
