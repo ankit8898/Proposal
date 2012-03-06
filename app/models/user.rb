@@ -6,9 +6,12 @@ belongs_to :country
 
 belongs_to :company
 
-def self.search(val)
-where("name like ?", "%#{val}%")
+def self.search(search)
+  if search
+    find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  else
+    find(:all)
+  end
 end
-
 
 end
